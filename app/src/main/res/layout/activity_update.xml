@@ -7,6 +7,8 @@
     android:orientation="vertical"
     tools:context=".Insert">
 
+    <!-- Other Views -->
+
     <TextView
         android:id="@+id/textView8"
         android:layout_width="match_parent"
@@ -43,7 +45,7 @@
         android:layout_marginEnd="40dp"
         android:drawableLeft="@drawable/baseline_person_24"
         android:ems="10"
-        android:hint="Nomor"
+        android:hint="Nama"
         android:inputType="text" />
 
     <TextView
@@ -62,7 +64,7 @@
         android:layout_marginEnd="40dp"
         android:drawableLeft="@drawable/baseline_date_range_24"
         android:ems="10"
-        android:hint="Nomor"
+        android:hint="Tanggal Lahir"
         android:inputType="text" />
 
     <TextView
@@ -73,16 +75,26 @@
         android:layout_marginEnd="40dp"
         android:text="Jenis Kelamin" />
 
-    <EditText
-        android:id="@+id/formJenis"
+    <RadioGroup
+        android:id="@+id/radioGroupJenis"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:ems="10"
-        android:drawableLeft="@drawable/baseline_male_24"
-        android:hint="Gender"
-        android:inputType="text" />
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radioMale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Laki-laki" />
+
+        <RadioButton
+            android:id="@+id/radioFemale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Perempuan" />
+    </RadioGroup>
 
     <TextView
         android:id="@+id/textView"
@@ -100,7 +112,7 @@
         android:layout_marginEnd="40dp"
         android:drawableLeft="@drawable/baseline_location_on_24"
         android:ems="10"
-        android:hint="Nomor"
+        android:hint="Alamat"
         android:inputType="text" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

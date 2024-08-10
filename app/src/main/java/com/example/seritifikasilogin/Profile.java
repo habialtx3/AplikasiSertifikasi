@@ -79,6 +79,7 @@ public class Profile extends AppCompatActivity {
                     formTanggalLahir.setText(cursor.getString(2));
                     formJenisKelamin.setText(cursor.getString(3));
                     formAlamat.setText(cursor.getString(4));
+                    setTitle(cursor.getString(1));
                     break;
                 }
             } while (cursor.moveToNext());

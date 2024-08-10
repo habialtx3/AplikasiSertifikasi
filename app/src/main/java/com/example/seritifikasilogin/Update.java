@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,7 +22,9 @@ import java.util.Calendar;
 public class Update extends AppCompatActivity {
 
     DatabaseHelper myDb;
-    EditText formNomor, formNama, formTanggalLahir, formJenisKelamin, formAlamat;
+    EditText formNomor, formNama, formTanggalLahir, formAlamat;
+    RadioGroup radioGroupJenis;
+    RadioButton radioMale, radioFemale;
     FloatingActionButton bUpdate;
     String nomor;
     private int mYear, mMonth, mDay;
@@ -36,21 +40,22 @@ public class Update extends AppCompatActivity {
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.baseline_arrow_back_24);
         }
 
-
         myDb = new DatabaseHelper(this);
 
         // Initialize the UI components
         formNomor = findViewById(R.id.formNomor);
         formNama = findViewById(R.id.formNama);
         formTanggalLahir = findViewById(R.id.formTanggal);
-        formJenisKelamin = findViewById(R.id.formJenis);
-        formAlamat = findViewById(R.id.formAlamat); // ID yang benar untuk formAlamat
+        formAlamat = findViewById(R.id.formAlamat);
+        radioGroupJenis = findViewById(R.id.radioGroupJenis);
+        radioMale = findViewById(R.id.radioMale);
+        radioFemale = findViewById(R.id.radioFemale);
         bUpdate = findViewById(R.id.bSimpan);
 
         // Get the selected item data from the Intent
         Intent intent = getIntent();
         String selectedItem = intent.getStringExtra("selectedItem");
-        nomor = selectedItem.split("\n")[0].split(": ")[1]; // Extract nomor from selected item
+        nomor = selectedItem.split("\n")[0].split(": ")[1];
 
         formTanggalLahir.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +63,7 @@ public class Update extends AppCompatActivity {
                 showDatePickerDialog();
             }
         });
+
         // Populate fields with existing data
         populateFields();
 
@@ -88,7 +94,6 @@ public class Update extends AppCompatActivity {
     }
 
     private void populateFields() {
-        // Get the data for the specific 'nomor' from the database
         Cursor cursor = myDb.getAllData();
         if (cursor != null && cursor.moveToFirst()) {
             do {
@@ -96,8 +101,16 @@ public class Update extends AppCompatActivity {
                     formNomor.setText(cursor.getString(0));
                     formNama.setText(cursor.getString(1));
                     formTanggalLahir.setText(cursor.getString(2));
-                    formJenisKelamin.setText(cursor.getString(3));
+
+                    String gender = cursor.getString(3);
+                    if (gender.equalsIgnoreCase("Laki-laki")) {
+                        radioMale.setChecked(true);
+                    } else if (gender.equalsIgnoreCase("Perempuan")) {
+                        radioFemale.setChecked(true);
+                    }
+
                     formAlamat.setText(cursor.getString(4));
+                    setTitle("Update "+cursor.getString(1));
                     break;
                 }
             } while (cursor.moveToNext());
@@ -111,14 +124,18 @@ public class Update extends AppCompatActivity {
         String nomor = formNomor.getText().toString();
         String nama = formNama.getText().toString();
         String tanggalLahir = formTanggalLahir.getText().toString();
-        String jenisKelamin = formJenisKelamin.getText().toString();
-        String alamat = formAlamat.getText().toString();
 
+        int selectedId = radioGroupJenis.getCheckedRadioButtonId();
+        RadioButton selectedGender = findViewById(selectedId);
+        String jenisKelamin = selectedGender != null ? selectedGender.getText().toString() : "";
+
+        String alamat = formAlamat.getText().toString();
 
         boolean isUpdated = myDb.updateData(nomor, nama, tanggalLahir, jenisKelamin, alamat);
         if (isUpdated) {
             Toast.makeText(Update.this, "Data berhasil diperbarui!", Toast.LENGTH_SHORT).show();
-            finish(); // Close the activity and return to MainActivity
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
         } else {
             Toast.makeText(Update.this, "Gagal memperbarui data!", Toast.LENGTH_SHORT).show();
         }

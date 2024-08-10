@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -19,7 +21,8 @@ import java.util.Calendar;
 public class Insert extends AppCompatActivity {
 
     DatabaseHelper db;
-    EditText formNama, formNomor, formAlamat, formJenis, formTanggal_lahir;
+    EditText formNama, formNomor, formAlamat, formTanggal_lahir;
+    RadioGroup radioGroupJenis;
     FloatingActionButton bSimpan;
     private int mYear, mMonth, mDay;
 
@@ -27,7 +30,6 @@ public class Insert extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insert);
-
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -39,8 +41,8 @@ public class Insert extends AppCompatActivity {
         formNomor = findViewById(R.id.formNomor);
         formNama = findViewById(R.id.formNama);
         formTanggal_lahir = findViewById(R.id.formTanggal);
-        formJenis = findViewById(R.id.formJenis);
         formAlamat = findViewById(R.id.formAlamat);
+        radioGroupJenis = findViewById(R.id.radioGroupJenis);
         bSimpan = findViewById(R.id.bSimpan);
 
         formTanggal_lahir.setOnClickListener(new View.OnClickListener() {
@@ -80,8 +82,11 @@ public class Insert extends AppCompatActivity {
         String nomor = formNomor.getText().toString();
         String nama = formNama.getText().toString();
         String tanggal_lahir = formTanggal_lahir.getText().toString();
-        String jenis_kelamin = formJenis.getText().toString();
         String alamat = formAlamat.getText().toString();
+
+        int selectedId = radioGroupJenis.getCheckedRadioButtonId();
+        RadioButton selectedGender = findViewById(selectedId);
+        String jenis_kelamin = selectedGender != null ? selectedGender.getText().toString() : "";
 
         if (nomor.isEmpty() || nama.isEmpty() || tanggal_lahir.isEmpty() || jenis_kelamin.isEmpty() || alamat.isEmpty()) {
             Toast.makeText(this, "Semua File Harus Diisi", Toast.LENGTH_SHORT).show();
@@ -126,7 +131,7 @@ public class Insert extends AppCompatActivity {
         formNomor.setText("");
         formNama.setText("");
         formTanggal_lahir.setText("");
-        formJenis.setText("");
+        radioGroupJenis.clearCheck();
         formAlamat.setText("");
     }
 }
