@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Insert">
+
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="20dp"
+        android:text="Aplikasi ini dirancang untuk mempermudah akses mahasiswa terhadap informasi akademik dan administrasi kampus. Dengan fitur yang lengkap, mulai dari jadwal kuliah hingga pengumuman penting, aplikasi ini menjadi alat yang sangat berguna bagi seluruh civitas akademika. " />
+</LinearLayout>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Dashboard">
+
+
+    <ImageView
+        android:id="@+id/logoStudent"
+        android:layout_width="257dp"
+        android:layout_height="175dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="160dp"
+        android:layout_marginBottom="10dp"
+        app:srcCompat="@drawable/student" />
+
+     <Button
+        android:layout_centerHorizontal="true"
+        android:id="@+id/buttonLihat"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logoStudent"
+        android:backgroundTint="#A30909"
+        android:text="LIHAT DATA" />
+
+    <Button
+        android:id="@+id/buttonInput"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonLihat"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="#3F51B5"
+        android:text="INPUT DATA" />
+
+    <Button
+        android:id="@+id/buttonInformasi"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonInput"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="#FF9800"
+        android:text="INFORMASI" />
+
+</RelativeLayout>
